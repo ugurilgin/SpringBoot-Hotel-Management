@@ -1,33 +1,32 @@
 package com.ugisoftware.hotelmanagement.entities;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.ugisoftware.hotelmanagement.constraints.BirthDate;
+import com.ugisoftware.hotelmanagement.utils.DateUtil;
 import com.ugisoftware.hotelmanagement.utils.Gender;
 
 import lombok.Data;
-
-@Entity
 @Data
-@Table(name="customer")
-public class Customers {
+@Entity
+@Table(name="employees")
+public class Employee {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -40,9 +39,28 @@ public class Customers {
 	@NotNull(message = "surname can not be empty")
 	private String surname;
 	
+	@Size(min=3, max=25,message = "Job Size must be between 3 and 25")
+	@NotNull(message = "Job can not be empty")
+	private String job;
+	
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
+	@NotNull(message = "Birth Date can not be empty")
+	@JsonFormat(pattern="dd-MM-yyyy")
+	@BirthDate(message = "The birth date must be greater or equal than 18")
+	@Past(message = "The date of birth must be in the past.")
+	private Date birthDate; 
 	
 	@NotNull(message = "gender can not be empty")
 	private Gender gender;
+	
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+	@NotNull(message = "Start to Job Date can not be empty")
+	@JsonFormat(pattern="dd-MM-yyyy")
+	private Date startDate; 
+	
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+	@JsonFormat(pattern="dd-MM-yyyy")
+	private Date finishDate ; 
 	
 	@Lob
 	@Column(columnDefinition="text")
@@ -63,35 +81,8 @@ public class Customers {
 	@Size(min=2, max=3)
 	private String blood;
 	
-	 @ManyToMany(fetch = FetchType.LAZY,
-		      cascade = {
-		          CascadeType.PERSIST,
-		          CascadeType.MERGE
-		      })
-		  @JoinTable(name = "customer_extras",
-		        joinColumns = { @JoinColumn(name = "customer_id") },
-		        inverseJoinColumns = { @JoinColumn(name = "extras_id") })
-	  private Set<Extras> extras = new HashSet<>();
-	 
-	 @ManyToMany(fetch = FetchType.LAZY,
-		      cascade = {
-		          CascadeType.PERSIST,
-		          CascadeType.MERGE
-		      })
-		  @JoinTable(name = "customer_services",
-		        joinColumns = { @JoinColumn(name = "customer_id") },
-		        inverseJoinColumns = { @JoinColumn(name = "service_id") })
-	  private Set<Services> services = new HashSet<>();
-	 
-	 @ManyToMany(fetch = FetchType.LAZY,
-		      cascade = {
-		          CascadeType.PERSIST,
-		          CascadeType.MERGE
-		      })
-		  @JoinTable(name = "customer_restaurant",
-		        joinColumns = { @JoinColumn(name = "customer_id") },
-		        inverseJoinColumns = { @JoinColumn(name = "restaurant_id") })
-	  private Set<Restaurant> restaurant = new HashSet<>();
+	@NotNull(message = "salary can not be empty")
+	private int salary;
 
 	public Long getId() {
 		return id;
@@ -117,12 +108,36 @@ public class Customers {
 		this.surname = surname;
 	}
 
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
 	public Gender getGender() {
 		return gender;
 	}
 
 	public void setGender(Gender gender) {
 		this.gender = gender;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getFinishDate() {
+		return finishDate;
+	}
+
+	public void setFinishDate(Date finishDate) {
+		this.finishDate = finishDate;
 	}
 
 	public String getAdress() {
@@ -157,29 +172,21 @@ public class Customers {
 		this.blood = blood;
 	}
 
-	public Set<Extras> getExtras() {
-		return extras;
+	public int getSalary() {
+		return salary;
 	}
 
-	public void setExtras(Set<Extras> extras) {
-		this.extras = extras;
+	public void setSalary(int salary) {
+		this.salary = salary;
 	}
 
-	public Set<Services> getServices() {
-		return services;
+	public String getJob() {
+		return job;
 	}
 
-	public void setServices(Set<Services> services) {
-		this.services = services;
+	public void setJob(String job) {
+		this.job = job;
 	}
-
-	public Set<Restaurant> getRestaurant() {
-		return restaurant;
-	}
-
-	public void setRestaurant(Set<Restaurant> restaurant) {
-		this.restaurant = restaurant;
-	}
-	 
-	 
+	
+	
 }
