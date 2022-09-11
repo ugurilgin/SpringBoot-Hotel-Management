@@ -20,6 +20,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.ugisoftware.hotelmanagement.utils.Blood;
 import com.ugisoftware.hotelmanagement.utils.Gender;
 
 import lombok.Data;
@@ -60,8 +61,8 @@ public class Customers {
 	@Email(message = "email should be a valid email")
 	private String email;
 	
-	@Size(min=2, max=3)
-	private String blood;
+	
+	private Blood blood;
 	
 	 @ManyToMany(fetch = FetchType.LAZY,
 		      cascade = {
@@ -149,11 +150,11 @@ public class Customers {
 		this.email = email;
 	}
 
-	public String getBlood() {
+	public Blood getBlood() {
 		return blood;
 	}
 
-	public void setBlood(String blood) {
+	public void setBlood(Blood blood) {
 		this.blood = blood;
 	}
 
@@ -181,5 +182,40 @@ public class Customers {
 		this.restaurant = restaurant;
 	}
 	 
-	 
+	  public void addExtras(Extras extras) {
+		    this.extras.add(extras);
+		    extras.getCustomers().add(this);
+		  }
+		  
+		  public void removeExtras(long extrasId) {
+		    Extras extras = this.extras.stream().filter(t -> t.getId() == extrasId).findFirst().orElse(null);
+		    if (extras != null) {
+		      this.extras.remove(extras);
+		      extras.getCustomers().remove(this);
+		    } 
+		    }
+		  public void addRestuarant(Restaurant restaurant) {
+			  this.restaurant.add(restaurant);
+			  restaurant.getCustomers().add(this);
+			  }
+			  
+			  public void removeRestuarant(long restuarantId) {
+			    Restaurant restaurant = this.restaurant.stream().filter(t -> t.getId() == restuarantId).findFirst().orElse(null);
+			    if (restaurant != null) {
+			      this.restaurant.remove(restaurant);
+			      restaurant.getCustomers().remove(this);
+			    } 
+			    }
+			  public void addServices(Services services) {
+				    this.services.add(services);
+				    services.getCustomers().add(this);
+				  }
+				  
+				  public void removeServices(long servicesId) {
+				    Services services = this.services.stream().filter(t -> t.getId() == servicesId).findFirst().orElse(null);
+				    if (services != null) {
+				      this.services.remove(services);
+				      services.getCustomers().remove(this);
+				    } 
+				    }
 }

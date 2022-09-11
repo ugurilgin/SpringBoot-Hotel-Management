@@ -3,6 +3,8 @@ package com.ugisoftware.hotelmanagement.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -40,7 +42,7 @@ public Rooms getRoom(Long roomId) {
 
 }
 
-public Rooms createRoom(RoomCreateDTO room)
+public Rooms createRoom(@Valid RoomCreateDTO room)
 {
 	Rooms newRooms=new Rooms();
 	Employee employee=employeeService.getEmployee(room.getEmployeeId()) ;
@@ -61,7 +63,7 @@ public Rooms createRoom(RoomCreateDTO room)
 
 
 
-public Rooms updateRoom(Long roomId,RoomCreateDTO room ) {
+public Rooms updateRoom(@Valid Long roomId,RoomCreateDTO room ) {
 	Employee employee=employeeService.getEmployee(room.getEmployeeId()) ;
 	
 	 return roomsRepository.findById(roomId).map(newroom -> {

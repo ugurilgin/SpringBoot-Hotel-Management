@@ -41,4 +41,37 @@ public class Extras {
 		  @JsonIgnore
 		  private Set<Customers> customers = new HashSet<>();
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public Set<Customers> getCustomers() {
+		return customers;
+	}
+
+	public void setCustomers(Set<Customers> customers) {
+		this.customers = customers;
+	}
+
+	
 }
