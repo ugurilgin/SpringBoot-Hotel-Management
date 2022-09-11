@@ -19,9 +19,11 @@ import com.ugisoftware.hotelmanagement.dto.response.CustomerResponseDTO;
 import com.ugisoftware.hotelmanagement.entities.Customers;
 import com.ugisoftware.hotelmanagement.entities.Extras;
 import com.ugisoftware.hotelmanagement.entities.Restaurant;
+import com.ugisoftware.hotelmanagement.entities.Services;
 import com.ugisoftware.hotelmanagement.services.CustomerService;
 import com.ugisoftware.hotelmanagement.services.ExtrasService;
 import com.ugisoftware.hotelmanagement.services.RestaurantService;
+import com.ugisoftware.hotelmanagement.services.ServiceService;
 
 	@RequestMapping("/customer")
 	@RestController
@@ -29,11 +31,13 @@ import com.ugisoftware.hotelmanagement.services.RestaurantService;
 		private CustomerService customerService;
 		private ExtrasService extrasService;
 		private RestaurantService restaurantService;
-	public CustomerController(CustomerService customerService,ExtrasService extrasService,RestaurantService restaurantService)
+		private ServiceService serviceService;
+	public CustomerController(CustomerService customerService,ExtrasService extrasService,RestaurantService restaurantService,ServiceService serviceService)
 	{
 		this.customerService=customerService;
 		this.extrasService=extrasService;
 		this.restaurantService=restaurantService;
+		this.serviceService=serviceService;
 	}
 
 	@GetMapping
@@ -53,11 +57,16 @@ import com.ugisoftware.hotelmanagement.services.RestaurantService;
 	}
 	
 	@GetMapping("/{customerId}/meals")
-	public ResponseEntity<?>  getAllMealssByCustomerId(@PathVariable  Long customerId) {
+	public ResponseEntity<?>  getAllMealsByCustomerId(@PathVariable  Long customerId) {
 	 
 		return restaurantService.getAllMealsByCustomerId(customerId);
 	}  
 	  
+	@GetMapping("/{customerId}/services")
+	public ResponseEntity<?>  getAllServiceByCustomerId(@PathVariable  Long customerId) {
+	 
+		return serviceService.getAllServiceByCustomerId(customerId);
+	} 
 	@PostMapping
 	public Customers  createPersonel(@Valid @RequestBody CustomerCreateDTO newCustomer) {
 		return customerService.createCustomer(newCustomer);
@@ -73,6 +82,12 @@ import com.ugisoftware.hotelmanagement.services.RestaurantService;
 	public ResponseEntity<?> addMeals(@PathVariable  Long customerId, @Valid @RequestBody Restaurant newMeals) {
 
 		return restaurantService.addMeals(customerId,newMeals);
+	}
+	
+	@PostMapping("/{customerId}/services")
+	public ResponseEntity<?> addService(@PathVariable  Long customerId, @Valid @RequestBody Services newService) {
+
+		return serviceService.addService(customerId,newService);
 	}
 	
 	@PutMapping("/{customerId}")
@@ -97,5 +112,12 @@ import com.ugisoftware.hotelmanagement.services.RestaurantService;
 	{
 		return restaurantService.deleteMealsFromCustomer(customerId,mealsId);
 	}
+	
+	@DeleteMapping("/{customerId}/services/{serviceId}")
+	public ResponseEntity<?> deleteServiceFromCustomer(@PathVariable Long customerId,@PathVariable Long serviceId)
+	{
+		return serviceService.deleteServiceFromCustomer(customerId,serviceId);
+	}
+	
 	}
 
