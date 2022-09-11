@@ -18,20 +18,22 @@ import com.ugisoftware.hotelmanagement.dto.request.CustomerCreateDTO;
 import com.ugisoftware.hotelmanagement.dto.response.CustomerResponseDTO;
 import com.ugisoftware.hotelmanagement.entities.Customers;
 import com.ugisoftware.hotelmanagement.entities.Extras;
+import com.ugisoftware.hotelmanagement.entities.Restaurant;
 import com.ugisoftware.hotelmanagement.services.CustomerService;
 import com.ugisoftware.hotelmanagement.services.ExtrasService;
-
-
+import com.ugisoftware.hotelmanagement.services.RestaurantService;
 
 	@RequestMapping("/customer")
 	@RestController
 	public class CustomerController {
 		private CustomerService customerService;
 		private ExtrasService extrasService;
-	public CustomerController(CustomerService customerService,ExtrasService extrasService)
+		private RestaurantService restaurantService;
+	public CustomerController(CustomerService customerService,ExtrasService extrasService,RestaurantService restaurantService)
 	{
 		this.customerService=customerService;
 		this.extrasService=extrasService;
+		this.restaurantService=restaurantService;
 	}
 
 	@GetMapping
@@ -49,7 +51,12 @@ import com.ugisoftware.hotelmanagement.services.ExtrasService;
 	 
 		return extrasService.getAllExtrasByCustomerId(customerId);
 	}
-	  
+	
+	@GetMapping("/{customerId}/meals")
+	public ResponseEntity<?>  getAllMealssByCustomerId(@PathVariable  Long customerId) {
+	 
+		return restaurantService.getAllMealsByCustomerId(customerId);
+	}  
 	  
 	@PostMapping
 	public Customers  createPersonel(@Valid @RequestBody CustomerCreateDTO newCustomer) {
@@ -58,9 +65,14 @@ import com.ugisoftware.hotelmanagement.services.ExtrasService;
 
 	@PostMapping("/{customerId}/extras")
 	public ResponseEntity<?> addExtras(@PathVariable  Long customerId, @Valid @RequestBody Extras newExtras) {
-        System.out.println("controller");
-
+       
 		return extrasService.addExtras(customerId,newExtras);
+	}
+	
+	@PostMapping("/{customerId}/meals")
+	public ResponseEntity<?> addMeals(@PathVariable  Long customerId, @Valid @RequestBody Restaurant newMeals) {
+
+		return restaurantService.addMeals(customerId,newMeals);
 	}
 	
 	@PutMapping("/{customerId}")
@@ -68,16 +80,22 @@ import com.ugisoftware.hotelmanagement.services.ExtrasService;
 	{
 		return customerService.updateCustomer(customerId,newCustomer);
 	} 
-
+	@DeleteMapping("/{customerId}")
+	public void deleteCustomer(@PathVariable Long customerId)
+	{
+		customerService.deleteCustomer(customerId);
+	}
+	
 	@DeleteMapping("/{customerId}/extras/{extrasId}")
 	public ResponseEntity<?> deleteExtrasFromCustomer(@PathVariable Long customerId,@PathVariable Long extrasId)
 	{
 		return extrasService.deleteExtrasFromCustomer(customerId,extrasId);
 	}
-	@DeleteMapping("/{customerId}")
-	public void deleteCustomer(@PathVariable Long customerId)
+	
+	@DeleteMapping("/{customerId}/meals/{mealsId}")
+	public ResponseEntity<?> deleteMealsFromCustomer(@PathVariable Long customerId,@PathVariable Long mealsId)
 	{
-		customerService.deleteCustomer(customerId);
+		return restaurantService.deleteMealsFromCustomer(customerId,mealsId);
 	}
 	}
 

@@ -14,12 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ugisoftware.hotelmanagement.dto.response.CustomerResponseDTO;
-import com.ugisoftware.hotelmanagement.dto.response.EmployeeResponseDTO;
 import com.ugisoftware.hotelmanagement.dto.response.ExtrasResponseDTO;
-import com.ugisoftware.hotelmanagement.entities.Employee;
 import com.ugisoftware.hotelmanagement.entities.Extras;
-import com.ugisoftware.hotelmanagement.services.EmployeeService;
 import com.ugisoftware.hotelmanagement.services.ExtrasService;
 
 

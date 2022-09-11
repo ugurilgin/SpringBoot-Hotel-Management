@@ -93,7 +93,6 @@ public ExtrasService(ExtrasRepository extrasRepository,CustomerRepository custom
 		      if (extrasId >=0) {
 		        Extras _extras = extrasRepository.findById(extrasId)
 		            .orElseThrow(() -> new EntityNotFoundException("Not found Extras with id = " + extrasId));
-		        System.out.println("burada");
 		        customer.addExtras(_extras);
 		        customerRepository.save(customer);
 		        return _extras;
@@ -112,7 +111,7 @@ public ExtrasService(ExtrasRepository extrasRepository,CustomerRepository custom
 			customers.removeExtras(extrasId);
 			customerRepository.save(customers);
 	        return ResponseEntity.ok().build();
-	    }).orElseThrow(() -> new EntityNotFoundException("Extra not found with id: " + customerId ));
+	    }).orElseThrow(() -> new EntityNotFoundException("Customer not found with id: " + customerId ));
 	}
 
 	}
