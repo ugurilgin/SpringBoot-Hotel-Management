@@ -53,7 +53,7 @@ public class Customers {
 	@Size(min=12 ,max=12)
 	@NotNull(message = "phone can not be empty")
 	@Pattern(regexp ="(?:\\d{3}-){2}\\d{4}")
-	private String phone;
+	private String phone;//orn 123-456-7745
 	
 	@Column(unique=true)
 	@Size(min=3 ,max=80)

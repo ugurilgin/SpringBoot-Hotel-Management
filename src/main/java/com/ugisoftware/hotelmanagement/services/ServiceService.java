@@ -46,15 +46,12 @@ public ServiceService(ServicesRepositories servicesRepositories,CustomerReposito
 
 	public Services updateService(Long serviceId, @Valid Services newService) {
 		return servicesRepositories.findById(serviceId).map(service -> {
-			 if(service==null)
-					throw new EntityNotFoundException("Service Not Found with id : " + service.getId());
-			 else {
 				 Services updateServices=new Services();
 				 updateServices.setId(newService.getId());
 				 updateServices.setName(newService.getName());
 				 updateServices.setPrice(newService.getPrice());
 	         return servicesRepositories.save(updateServices);
-				}
+			
 	     }).orElseThrow(() -> new EntityNotFoundException("SeviceId " + serviceId + " not found"));
 
 	}

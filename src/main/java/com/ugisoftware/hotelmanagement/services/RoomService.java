@@ -56,6 +56,7 @@ public Rooms createRoom(@Valid RoomCreateDTO room)
 		newRooms.setStatue(room.getStatue());
 		newRooms.setType(room.getType());
 		newRooms.setEmployee(employee);
+		newRooms.setRoomNumber(room.getRoomNumber());
 		
 	}
 	return roomsRepository.save(newRooms);
@@ -77,6 +78,7 @@ public Rooms updateRoom(@Valid Long roomId,RoomCreateDTO room ) {
 		 newroom.setStatue(room.getStatue());
 		 newroom.setType(room.getType());
 		 newroom.setEmployee(employee);
+		 newroom.setRoomNumber(room.getRoomNumber());
          return roomsRepository.save(newroom);
 			}
      }).orElseThrow(() -> new EntityNotFoundException("RoomId " + roomId + " not found"));

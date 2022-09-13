@@ -1,5 +1,6 @@
 package com.ugisoftware.hotelmanagement.entities;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -19,7 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ugisoftware.hotelmanagement.constraints.BirthDate;
-import com.ugisoftware.hotelmanagement.utils.DateUtil;
+import com.ugisoftware.hotelmanagement.constraints.PastString;
 import com.ugisoftware.hotelmanagement.utils.Gender;
 
 import lombok.Data;
@@ -43,24 +44,17 @@ public class Employee {
 	@NotNull(message = "Job can not be empty")
 	private String job;
 	
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
-	@NotNull(message = "Birth Date can not be empty")
-	@JsonFormat(pattern="dd-MM-yyyy")
+	@PastString(message = "The date of birth must be in the past.")
 	@BirthDate(message = "The birth date must be greater or equal than 18")
-	@Past(message = "The date of birth must be in the past.")
-	private Date birthDate; 
+	private String birthDate; 
 	
 	@NotNull(message = "gender can not be empty")
 	private Gender gender;
 	
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
 	@NotNull(message = "Start to Job Date can not be empty")
-	@JsonFormat(pattern="dd-MM-yyyy")
-	private Date startDate; 
+	private String startDate; 
 	
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
-	@JsonFormat(pattern="dd-MM-yyyy")
-	private Date finishDate ; 
+	private String finishDate ; 
 	
 	@Lob
 	@Column(columnDefinition="text")
@@ -108,14 +102,6 @@ public class Employee {
 		this.surname = surname;
 	}
 
-	public Date getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
-	}
-
 	public Gender getGender() {
 		return gender;
 	}
@@ -124,19 +110,27 @@ public class Employee {
 		this.gender = gender;
 	}
 
-	public Date getStartDate() {
+	public String getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 
-	public Date getFinishDate() {
+	public String getFinishDate() {
 		return finishDate;
 	}
 
-	public void setFinishDate(Date finishDate) {
+	public void setFinishDate(String finishDate) {
 		this.finishDate = finishDate;
 	}
 

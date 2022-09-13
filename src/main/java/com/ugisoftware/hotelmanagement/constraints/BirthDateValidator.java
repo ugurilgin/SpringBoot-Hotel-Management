@@ -1,16 +1,19 @@
 package com.ugisoftware.hotelmanagement.constraints;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.Period;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-public class BirthDateValidator implements ConstraintValidator<BirthDate, Date> {
-  @Override
-  public boolean isValid(final Date valueToValidate, final ConstraintValidatorContext context) {
-    Calendar dateInCalendar = Calendar.getInstance();
-    dateInCalendar.setTime(valueToValidate);
+import com.ugisoftware.hotelmanagement.utils.DateUtil;
 
-    return Calendar.getInstance().get(Calendar.YEAR) - dateInCalendar.get(Calendar.YEAR) >= 18;
+public class BirthDateValidator implements ConstraintValidator<BirthDate, String> {
+  @Override
+  public boolean isValid(final String valueToValidate, final ConstraintValidatorContext context) {
+	LocalDate valueDate=DateUtil.setDate(valueToValidate);	
+    LocalDate todayDate=LocalDate.now();
+    Period period = Period.between(valueDate, todayDate);
+    return period.getYears() >= 18;
   }
 }

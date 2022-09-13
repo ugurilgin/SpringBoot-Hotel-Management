@@ -79,13 +79,8 @@ public class EmployeeService {
 		DateUtil.compareDates(newEmployee.getBirthDate(), newEmployee.getStartDate(), newEmployee.getFinishDate());
 
 		 return employeeRepository.findById(employeeId).map(employee -> {
-			 if(employee==null)
-					throw new EntityNotFoundException("Employee Not Found with id : " + employee.getId());
-			 
-			 else {
-					
-					Employee updateEmployee=new Employee();
-					
+	
+					Employee updateEmployee=new Employee();	
 					updateEmployee.setAdress(newEmployee.getAdress());
 					updateEmployee.setBirthDate(newEmployee.getBirthDate());
 					updateEmployee.setBlood(newEmployee.getBlood());
@@ -100,7 +95,7 @@ public class EmployeeService {
 					updateEmployee.setStartDate(newEmployee.getStartDate());
 					updateEmployee.setJob(newEmployee.getJob());
 	         return employeeRepository.save(updateEmployee);
-				}
+				
 	     }).orElseThrow(() -> new EntityNotFoundException("EmployeeId " + employeeId + " not found"));
 
 		

@@ -1,5 +1,6 @@
 package com.ugisoftware.hotelmanagement.dto.response;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import com.ugisoftware.hotelmanagement.entities.Employee;
@@ -11,10 +12,10 @@ public class EmployeeResponseDTO {
 	private Long id;
 	private String name;
 	private String surname;
-	private Date birthDate; 
+	private String birthDate; 
 	private Gender gender;
-	private Date startDate; 
-	private Date finishDate ; 
+	private String startDate; 
+	private String finishDate ; 
 	private String adress;
 	private String email;
 	private String blood;
@@ -52,13 +53,7 @@ public class EmployeeResponseDTO {
 	public void setSurname(String surname) {
 		this.surname = surname;
 	}
-	public Date getBirthDate() {
-		return DateUtil.removeTime(birthDate);
-	}
-
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = DateUtil.removeTime(birthDate);
-	}
+	
 
 	public Gender getGender() {
 		return gender;
@@ -68,22 +63,24 @@ public class EmployeeResponseDTO {
 		this.gender = gender;
 	}
 
-	public Date getStartDate() {
-		return DateUtil.removeTime(startDate);
+	public String getBirthDate() {
+		return birthDate;
 	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = DateUtil.removeTime(startDate);
+	public void setBirthDate(String birthDate) {
+		this.birthDate = birthDate;
 	}
-
-	public Date getFinishDate() {
-		return DateUtil.removeTime(finishDate);
+	public String getStartDate() {
+		return startDate;
 	}
-
-	public void setFinishDate(Date finishDate) {
-		this.finishDate = DateUtil.removeTime(finishDate);
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
 	}
-
+	public String getFinishDate() {
+		return finishDate;
+	}
+	public void setFinishDate(String finishDate) {
+		this.finishDate = finishDate;
+	}
 	public String getAdress() {
 		return adress;
 	}

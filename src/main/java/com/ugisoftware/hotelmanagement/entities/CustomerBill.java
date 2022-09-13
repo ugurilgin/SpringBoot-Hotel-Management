@@ -1,5 +1,7 @@
 package com.ugisoftware.hotelmanagement.entities;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 
@@ -16,10 +18,11 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.ugisoftware.hotelmanagement.utils.DateUtil;
+
 
 import lombok.Data;
 
@@ -37,19 +40,14 @@ public class CustomerBill {
 	@JsonIgnore
 	private Customers customers;
 	
-	
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	@NotNull(message = "Entry Date can not be empty")
-	@JsonFormat(pattern="dd-MM-yyyy" )
-	private Date entryDate;
+	private String  entryDate;
 	
-	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	@NotNull(message = "Exit Date can not be empty")
-	@JsonFormat(pattern="dd-MM-yyyy")
-	private Date exitDate;
+	private String  exitDate;
 	
 	@NotNull(message = "count can not be empty")
-	private int count;
+	private int count;//Person Count who stayed in the room
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "room_id",nullable = false)
@@ -73,20 +71,23 @@ public class CustomerBill {
 		this.customers = customers;
 	}
 
-	public Date getEntryDate() {
-		return DateUtil.removeTime(entryDate);
+	
+
+
+	public String getEntryDate() {
+		return entryDate;
 	}
 
-	public void setEntryDate(Date entryDate) {
-		this.entryDate = DateUtil.removeTime(entryDate);
+	public void setEntryDate(String entryDate) {
+		this.entryDate = entryDate;
 	}
 
-	public Date getExitDate() {
-		return DateUtil.removeTime(exitDate);
+	public String getExitDate() {
+		return exitDate;
 	}
 
-	public void setExitDate(Date exitDate) {
-		this.exitDate = DateUtil.removeTime(exitDate);
+	public void setExitDate(String exitDate) {
+		this.exitDate = exitDate;
 	}
 
 	public int getCount() {

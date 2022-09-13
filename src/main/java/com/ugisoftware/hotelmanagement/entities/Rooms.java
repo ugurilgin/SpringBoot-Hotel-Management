@@ -12,6 +12,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ugisoftware.hotelmanagement.utils.RoomClean;
+import com.ugisoftware.hotelmanagement.utils.RoomStatues;
+import com.ugisoftware.hotelmanagement.utils.RoomTypes;
 
 import lombok.Data;
 @Data
@@ -28,21 +31,24 @@ public class Rooms {
 	@NotNull(message = "Price can not be null")
 	private int price;
 	
+	@NotNull(message = "Room Number can not be null")
+	private int roomNumber;
+	
 	@NotNull(message = "Type can not be null")
-	@Size(min=3, max=25,message = "Type of Room Size must be between 3 and 25")
-	private String type;
+	private RoomTypes type;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id",nullable = false)
 	@JsonIgnore
 	private Employee employee;
+	
 	@NotNull(message = "Statue can not be empty")
 	@Size(min=3, max=25,message = "Statue size must be between 3 and 25")
-	private String statue;
+	private RoomStatues statue;
 	
 	@NotNull(message = "Is Clean can not be empty")
-	@Size(min=3, max=25,message = "Is Clean  size must be between 3 and 25")
-	private String clean;
+	
+	private RoomClean clean;
 	
 	public Long getId() {
 		return id;
@@ -68,11 +74,11 @@ public class Rooms {
 		this.price = price;
 	}
 
-	public String getType() {
+	public RoomTypes getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(RoomTypes type) {
 		this.type = type;
 	}
 
@@ -86,20 +92,28 @@ public class Rooms {
 		this.employee = employee;
 	}
 
-	public String getStatue() {
+	public RoomStatues getStatue() {
 		return statue;
 	}
 
-	public void setStatue(String statue) {
+	public void setStatue(RoomStatues statue) {
 		this.statue = statue;
 	}
 
-	public String getClean() {
+	public RoomClean getClean() {
 		return clean;
 	}
 
-	public void setClean(String clean) {
+	public void setClean(RoomClean clean) {
 		this.clean = clean;
+	}
+
+	public int getRoomNumber() {
+		return roomNumber;
+	}
+
+	public void setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
 	}
 	
 	

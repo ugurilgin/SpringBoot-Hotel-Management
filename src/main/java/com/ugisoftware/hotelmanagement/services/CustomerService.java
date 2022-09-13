@@ -64,11 +64,7 @@ public class CustomerService {
 	
 	public Customers updateCustomer(Long customerId, @Valid Customers newCustomer) {
 		 return customerRepository.findById(customerId).map(customer -> {
-			 if(customer==null)
-					throw new EntityNotFoundException("Customer Not Found with id : " + customer.getId());
-			 
-			 else {
-					
+	
 				 Customers updateCustomer=new Customers();
 					
 				 updateCustomer.setAdress(newCustomer.getAdress());
@@ -80,7 +76,7 @@ public class CustomerService {
 				 updateCustomer.setSurname(newCustomer.getSurname());
 				 updateCustomer.setId(newCustomer.getId());
 	         return customerRepository.save(updateCustomer);
-				}
+				
 	     }).orElseThrow(() -> new EntityNotFoundException("CustomerId " + customerId + " not found"));
 
 	}

@@ -1,15 +1,18 @@
 package com.ugisoftware.hotelmanagement.dto.request;
 
+import com.ugisoftware.hotelmanagement.utils.RoomClean;
+import com.ugisoftware.hotelmanagement.utils.RoomStatues;
+import com.ugisoftware.hotelmanagement.utils.RoomTypes;
 
 public class RoomCreateDTO {
 	private Long id;
 	private Long employeeId;
 	private int beds;
 	private int price;
-	private String type;
-	private String statue;
-	private String clean;
-
+	private RoomTypes type;
+	private RoomStatues statue;
+	private RoomClean clean;
+    private int roomNumber;
 
 	public Long getId() {
 		return id;
@@ -46,28 +49,36 @@ public class RoomCreateDTO {
 		this.price = price;
 	}
 
-	public String getType() {
+	public RoomTypes getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(RoomTypes type) {
 		this.type = type;
 	}
 
-	public String getStatue() {
+	public RoomStatues getStatue() {
 		return statue;
 	}
 
-	public void setStatue(String statue) {
+	public void setStatue(RoomStatues statue) {
 		this.statue = statue;
 	}
 
-	public String getClean() {
+	public RoomClean getClean() {
 		return clean;
 	}
 
-	public void setClean(String clean) {
+	public void setClean(RoomClean clean) {
 		this.clean = clean;
+	}
+
+	public int getRoomNumber() {
+		return roomNumber;
+	}
+
+	public void setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
 	}
 
 	

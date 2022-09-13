@@ -1,6 +1,9 @@
 package com.ugisoftware.hotelmanagement.dto.response;
 
 import com.ugisoftware.hotelmanagement.entities.Rooms;
+import com.ugisoftware.hotelmanagement.utils.RoomClean;
+import com.ugisoftware.hotelmanagement.utils.RoomStatues;
+import com.ugisoftware.hotelmanagement.utils.RoomTypes;
 
 
 public class RoomsResponseDTO {
@@ -9,10 +12,10 @@ public class RoomsResponseDTO {
 	private String personelfullname;
 	private int bed;
 	private int price;
-	private String type;
-	private String statue;
-	private String clean;
-
+	private RoomTypes type;
+	private RoomStatues statue;
+	private RoomClean clean;
+	private int roomNumber;
 	public RoomsResponseDTO(Rooms room) {
 		this.id = room.getId();
 		this.personelid =room.getEmployee().getId();
@@ -22,6 +25,7 @@ public class RoomsResponseDTO {
 		this.type=room.getType();
 		this.statue=room.getStatue();
 		this.clean=room.getClean();
+		this.roomNumber=room.getRoomNumber();
 	}
 
 	public Long getId() {
@@ -64,29 +68,39 @@ public class RoomsResponseDTO {
 		this.price = price;
 	}
 
-	public String getType() {
+	public RoomTypes getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(RoomTypes type) {
 		this.type = type;
 	}
 
-	public String getStatue() {
+	public RoomStatues getStatue() {
 		return statue;
 	}
 
-	public void setStatue(String statue) {
+	public void setStatue(RoomStatues statue) {
 		this.statue = statue;
 	}
 
-	public String getClean() {
+	public RoomClean getClean() {
 		return clean;
 	}
 
-	public void setClean(String clean) {
+	public void setClean(RoomClean clean) {
 		this.clean = clean;
 	}
+
+	public int getRoomNumber() {
+		return roomNumber;
+	}
+
+	public void setRoomNumber(int roomNumber) {
+		this.roomNumber = roomNumber;
+	}
+
+	
 
 	
 	
