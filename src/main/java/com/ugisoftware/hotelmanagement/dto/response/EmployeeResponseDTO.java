@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 import com.ugisoftware.hotelmanagement.entities.Employee;
+import com.ugisoftware.hotelmanagement.utils.Blood;
 import com.ugisoftware.hotelmanagement.utils.DateUtil;
 import com.ugisoftware.hotelmanagement.utils.Gender;
 
@@ -18,7 +19,7 @@ public class EmployeeResponseDTO {
 	private String finishDate ; 
 	private String adress;
 	private String email;
-	private String blood;
+	private Blood blood;
 	private int salary;
 	private String job;
 	public EmployeeResponseDTO(Employee employee) {
@@ -93,10 +94,10 @@ public class EmployeeResponseDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getBlood() {
+	public Blood getBlood() {
 		return blood;
 	}
-	public void setBlood(String blood) {
+	public void setBlood(Blood blood) {
 		this.blood = blood;
 	}
 	public int getSalary() {

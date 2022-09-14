@@ -20,10 +20,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Object> handleEntityNotFoundException(Exception ex){
-
+    	 List<String> details = new ArrayList<>();
+    	 details.add(ex.getMessage());
         ApiError apiError = new ApiError.
                 Builder()
-                .withMessage(ex.getMessage())
+                .withMessage(details)
                 .withHttpStatus(HttpStatus.NOT_FOUND)
                 .withCreatedAt()
                 .build();
@@ -39,8 +40,8 @@ public class GlobalExceptionHandler {
          }
         ApiError apiError = new ApiError.
                 Builder()
-                .withMessage("Errors")
-                .withList(details)
+                
+                .withMessage(details)
                 .withHttpStatus(HttpStatus.INTERNAL_SERVER_ERROR)
                 .withCreatedAt()
                 .build();

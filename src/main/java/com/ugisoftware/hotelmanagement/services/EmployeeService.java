@@ -14,7 +14,7 @@ import com.ugisoftware.hotelmanagement.utils.DateUtil;
 
 @Service
 public class EmployeeService {
-	EmployeeRepository employeeRepository;
+	private EmployeeRepository employeeRepository;
 
 	public EmployeeService(EmployeeRepository employeeRepository) {
 		this.employeeRepository = employeeRepository;

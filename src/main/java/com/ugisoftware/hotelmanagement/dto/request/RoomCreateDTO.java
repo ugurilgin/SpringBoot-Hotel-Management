@@ -1,5 +1,6 @@
 package com.ugisoftware.hotelmanagement.dto.request;
 
+import com.ugisoftware.hotelmanagement.entities.Rooms;
 import com.ugisoftware.hotelmanagement.utils.RoomClean;
 import com.ugisoftware.hotelmanagement.utils.RoomStatues;
 import com.ugisoftware.hotelmanagement.utils.RoomTypes;
@@ -13,6 +14,8 @@ public class RoomCreateDTO {
 	private RoomStatues statue;
 	private RoomClean clean;
     private int roomNumber;
+
+	
 
 	public Long getId() {
 		return id;

@@ -1,6 +1,7 @@
 package com.ugisoftware.hotelmanagement.services;
 
 import java.util.List;
+
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -16,11 +17,13 @@ import com.ugisoftware.hotelmanagement.entities.Rooms;
 import com.ugisoftware.hotelmanagement.exceptions.EntityNotFoundException;
 import com.ugisoftware.hotelmanagement.repositories.CustomerBillRepository;
 import com.ugisoftware.hotelmanagement.utils.DateUtil;
+
 @Service
 public class CustomerBillService {
 	private CustomerBillRepository customerBillRepository;
 	private CustomerService customerService;
 	private RoomService roomService;
+	
 
 	public CustomerBillService(CustomerBillRepository customerBillRepository, CustomerService customerService,RoomService roomService) {
 		this.customerBillRepository = customerBillRepository;

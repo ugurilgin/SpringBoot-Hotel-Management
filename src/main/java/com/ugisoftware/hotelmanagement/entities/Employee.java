@@ -21,6 +21,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.ugisoftware.hotelmanagement.constraints.BirthDate;
 import com.ugisoftware.hotelmanagement.constraints.PastString;
+import com.ugisoftware.hotelmanagement.utils.Blood;
 import com.ugisoftware.hotelmanagement.utils.Gender;
 
 import lombok.Data;
@@ -72,11 +73,38 @@ public class Employee {
 	@Email(message = "email should be a valid email")
 	private String email;
 	
-	@Size(min=2, max=3)
-	private String blood;
+	private Blood blood;
 	
 	@NotNull(message = "salary can not be empty")
 	private int salary;
+	public Employee() {
+	
+	}
+	
+	public Employee(Long id,
+			@Size(min = 3, max = 25, message = "Name Size must be between 3 and 25") @NotNull(message = "name can not be empty") String name,
+			@Size(min = 3, max = 25, message = "Surname Size must be between 3 and 25") @NotNull(message = "surname can not be empty") String surname,
+			@Size(min = 3, max = 25, message = "Job Size must be between 3 and 25") @NotNull(message = "Job can not be empty") String job,
+			String birthDate, @NotNull(message = "gender can not be empty") Gender gender,
+			@NotNull(message = "Start to Job Date can not be empty") String startDate, String finishDate, String adress,
+			@Size(min = 12, max = 12) @NotNull(message = "phone can not be empty") @Pattern(regexp = "(?:\\d{3}-){2}\\d{4}") String phone,
+			@Size(min = 3, max = 80) @NotNull(message = "email can not be empty") @Email(message = "email should be a valid email") String email,
+			Blood blood, @NotNull(message = "salary can not be empty") int salary) {
+		
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.job = job;
+		this.birthDate = birthDate;
+		this.gender = gender;
+		this.startDate = startDate;
+		this.finishDate = finishDate;
+		this.adress = adress;
+		this.phone = phone;
+		this.email = email;
+		this.blood = blood;
+		this.salary = salary;
+	}
 
 	public Long getId() {
 		return id;
@@ -158,11 +186,11 @@ public class Employee {
 		this.email = email;
 	}
 
-	public String getBlood() {
+	public Blood getBlood() {
 		return blood;
 	}
 
-	public void setBlood(String blood) {
+	public void setBlood(Blood blood) {
 		this.blood = blood;
 	}
 

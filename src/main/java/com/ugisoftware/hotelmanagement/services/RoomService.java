@@ -3,6 +3,7 @@ package com.ugisoftware.hotelmanagement.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.management.loading.PrivateClassLoader;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,8 @@ import com.ugisoftware.hotelmanagement.repositories.RoomsRepository;
 
 @Service
 public class RoomService {
-RoomsRepository roomsRepository;
-EmployeeService employeeService;
+private RoomsRepository roomsRepository;
+private EmployeeService employeeService;
 public RoomService(RoomsRepository roomsRepository,EmployeeService employeeService) {
 	this.roomsRepository = roomsRepository;
 	this.employeeService=employeeService;

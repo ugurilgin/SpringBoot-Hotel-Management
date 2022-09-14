@@ -2,6 +2,7 @@ package com.ugisoftware.hotelmanagement.controllers;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,17 +35,18 @@ public List<EmployeeResponseDTO> getAllPersonels() {
 }
 
 @GetMapping("/{employeeId}")
-public Employee getPersonel(@PathVariable Long employeeId) {
+public Employee getEmployee(@PathVariable Long employeeId) {
 	return employeeService.getEmployee(employeeId);
 }
 
 @PostMapping
-public Employee  createPersonel(@Valid @RequestBody Employee newEmployee) {
+public Employee  createEmployee(@Valid @RequestBody Employee newEmployee) {
 	return employeeService.createEmployee(newEmployee);
 }
 
 @PutMapping("/{employeeId}")
-public Employee updatePersonel(@PathVariable Long employeeId,@Valid @RequestBody Employee newEmployee)
+@Transactional
+public Employee updateEmployee(@PathVariable Long employeeId,@Valid @RequestBody Employee newEmployee)
 {
 	return employeeService.updateEmployee(employeeId,newEmployee);
 } 

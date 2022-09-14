@@ -11,22 +11,21 @@ public class ApiError {
     private HttpStatus httpStatus;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private LocalDateTime createdAt;
-    private String message;
-    private List<String> list;
+    private List<String> message;
+   
 
     public ApiError(Builder builder) {
         this.httpStatus = builder.httpStatus;
         this.createdAt = builder.createdAt;
         this.message = builder.message;
-        this.list=builder.list;
     }
 
     static class Builder {
         private HttpStatus httpStatus;
-        private String message;
+        private  List<String> message;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
         private LocalDateTime createdAt;
-        private List<String> list;
+       
 
         public Builder(){}
 
@@ -38,14 +37,11 @@ public class ApiError {
             this.createdAt = LocalDateTime.now();
             return this;
         }
-        public Builder withMessage(String message) {
+        public Builder withMessage( List<String> message) {
             this.message = message;
             return this;
         }
-        public Builder withList(List<String> list) {
-            this.list = list;
-            return this;
-        }
+     
         public ApiError build(){
             return new ApiError(this);
         }
@@ -68,20 +64,14 @@ public class ApiError {
 		this.createdAt = createdAt;
 	}
 
-	public String getMessage() {
+	public  List<String> getMessage() {
 		return message;
 	}
 
-	public void setMessage(String message) {
+	public void setMessage( List<String> message) {
 		this.message = message;
 	}
 
-	public List<String> getList() {
-		return list;
-	}
-
-	public void setList(List<String> list) {
-		this.list = list;
-	}
+	
 
 }
