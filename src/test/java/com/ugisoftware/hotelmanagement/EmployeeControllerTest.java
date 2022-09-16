@@ -186,7 +186,7 @@ public class EmployeeControllerTest {
         given(employeeRepository.findById(employeeId)).willReturn(Optional.of(savedEmployee) );
         given(employeeService.getEmployee(employeeId)).willReturn(savedEmployee);
 
-        given(employeeService.updateEmployee(employeeId,updatedEmployee))
+        given(employeeService.updateEmployee(anyLong(),any(Employee.class)))
         .willReturn(updatedEmployee);
 
         // when -  action or the behaviour that we are going test
