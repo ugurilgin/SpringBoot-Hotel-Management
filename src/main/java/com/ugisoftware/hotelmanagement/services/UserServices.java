@@ -2,12 +2,17 @@ package com.ugisoftware.hotelmanagement.services;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.ugisoftware.hotelmanagement.entities.Employee;
 import com.ugisoftware.hotelmanagement.entities.User;
+import com.ugisoftware.hotelmanagement.exceptions.EntityNotFoundException;
 import com.ugisoftware.hotelmanagement.repositories.UserRepository;
+import com.ugisoftware.hotelmanagement.utils.DateUtil;
 
 
 @Service
@@ -27,35 +32,51 @@ public List<User> getAllUsers() {
 public User createUser(User newUser)
 {
 	
-	return userRepository.save(newUser);
+	
+	Boolean isUserByEmail=userRepository.existsByEmail(newUser.getEmail());
+	Boolean isUserByUserName=userRepository.existsByUsername(newUser.getUsername());
+	 if(isUserByEmail )
+		throw new EntityNotFoundException("This email is already in use");
+	
+	 else if(isUserByUserName )
+			throw new EntityNotFoundException("This username is already in use");
+
+	else {
+	
+	User createUser=new User();
+	
+	createUser.setEmail(newUser.getEmail());
+	createUser.setName(newUser.getName());
+	createUser.setSurname(newUser.getSurname());
+	createUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+	createUser.setId(newUser.getId());
+	return userRepository.save(createUser);
+	}
 }
 
 public User getUser(Long userId) {
-	// TODO Auto-generated method stub
-	return userRepository.findById(userId).orElse(null);
+	User user =  userRepository.findById(userId)
+            .orElseThrow(() -> new EntityNotFoundException("User Not Found with id : " + userId));
+     return user;
 	}
 
 public User updateUser(User updateUser, Long userId) {
 	// TODO Auto-generated method stub
-	User updatedUser;
-	Optional<User> user=userRepository.findById(userId);
-	if(user.isPresent())
-	{
-		User foundedUser=user.get();
-		foundedUser.setUsername(updateUser.getUsername());
+	 return userRepository.findById(userId).map(user -> {
+		 User foundedUser=new User();
+		 foundedUser.setName(updateUser.getName());
+		 foundedUser.setSurname(updateUser.getSurname());
 		foundedUser.setPassword(passwordEncoder.encode(updateUser.getPassword()));
-		updatedUser= userRepository.save(foundedUser);
-	}
-	else
-	{
-		updatedUser= null;
-	}
-	return updatedUser;
+		return userRepository.save(foundedUser);
+		
+     }).orElseThrow(() -> new EntityNotFoundException("UserId " + userId + " not found"));
 }
 
-public void deleteUser(Long userId) {
-	// TODO Auto-generated method stub
-	 userRepository.deleteById(userId);	
+public ResponseEntity<?> deleteUser(Long userId) {
+	return userRepository.findById(userId).map(user -> {
+        userRepository.delete(user);
+        return ResponseEntity.ok().build();
+    }).orElseThrow(() -> new EntityNotFoundException("UserId " + userId + " not found"));
 }
 
 

@@ -28,7 +28,7 @@ import com.ugisoftware.hotelmanagement.security.service.UserDetailsServiceImp;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 private UserDetailsServiceImp userDetailsService;
 private JWTAuthenticationEntryPoint handler;
-/*public SecurityConfig(UserDetailsServiceImp userDetailsService, JWTAuthenticationEntryPoint handler) {
+public SecurityConfig(UserDetailsServiceImp userDetailsService, JWTAuthenticationEntryPoint handler) {
 
 	this.userDetailsService = userDetailsService;
 	this.handler = handler;
@@ -55,7 +55,7 @@ public BCryptPasswordEncoder passwordEncoder() {
 public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
     authenticationManagerBuilder.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 }
-*/
+
 @Bean
 public CorsFilter corsFilter() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -86,6 +86,6 @@ public void configure(HttpSecurity httpSecurity) throws Exception {
 	//	.antMatchers("/auth/**").permitAll()
 	//	.anyRequest().authenticated();
 		
-	//httpSecurity.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+	httpSecurity.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 }
 }

@@ -45,8 +45,9 @@ public class User {
   public User() {
   }
 
-  public User(String name ,String surname,String username, String email, String password,Boolean enabled) {
-    this.name=name;
+  public User(Long id,String name ,String surname,String username, String email, String password,Boolean enabled) {
+	this.id=id;
+   	this.name=name;
     this.surname = surname;
 	this.username = username;
     this.email = email;

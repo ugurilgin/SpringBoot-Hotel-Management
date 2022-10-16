@@ -25,10 +25,10 @@ public class JWTTokenProvider {
 	
 	private static final Logger logger = LoggerFactory.getLogger(JWTTokenProvider.class);
 
-	  @Value("${bezkoder.app.jwtSecret}")
+	  @Value("${ugisoftware.app.jwtSecret}")
 	  private String jwtSecret;
 
-	  @Value("${bezkoder.app.jwtExpirationMs}")
+	  @Value("${ugisoftware.app.jwtExpirationMs}")
 	  private int jwtExpirationMs;
 
 	  public String generateJwtToken(Authentication authentication) {

@@ -18,6 +18,19 @@ private String exitDate;
 
 private Long customerId;
 private Long roomId;
+
+public BillCreateDTO() {
+	super();
+}
+public BillCreateDTO(Long id, int count, String entryDate, String exitDate, Long customerId, Long roomId) {
+	super();
+	this.id = id;
+	this.count = count;
+	this.entryDate = entryDate;
+	this.exitDate = exitDate;
+	this.customerId = customerId;
+	this.roomId = roomId;
+}
 public Long getId() {
 	return id;
 }

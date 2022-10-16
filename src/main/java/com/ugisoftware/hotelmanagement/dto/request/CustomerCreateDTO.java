@@ -1,5 +1,6 @@
 package com.ugisoftware.hotelmanagement.dto.request;
 
+import com.ugisoftware.hotelmanagement.entities.Customers;
 import com.ugisoftware.hotelmanagement.utils.Blood;
 import com.ugisoftware.hotelmanagement.utils.Gender;
 
@@ -23,6 +24,17 @@ public CustomerCreateDTO(Long id, String name, String surname, String adress, Bl
 	this.gender = gender;
 	this.phone = phone;
 }
+
+public CustomerCreateDTO(Customers newCustomers) {
+	this.id = newCustomers.getId();
+	this.name =newCustomers. getName();
+	this.surname = newCustomers.getSurname();
+	this.adress =newCustomers. getAdress();
+	this.blood = newCustomers.getBlood();
+	this.email = newCustomers.getEmail();
+	this.gender =newCustomers. getGender();
+	this.phone = newCustomers.getPhone();}
+
 public Long getId() {
 	return id;
 }

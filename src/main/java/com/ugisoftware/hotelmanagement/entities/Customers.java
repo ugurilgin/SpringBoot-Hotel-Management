@@ -94,6 +94,34 @@ public class Customers {
 		        inverseJoinColumns = { @JoinColumn(name = "restaurant_id") })
 	  private Set<Restaurant> restaurant = new HashSet<>();
 
+
+	
+	
+	public Customers() {
+		super();
+	}
+
+	public Customers(Long id,
+			@Size(min = 3, max = 25, message = "Name Size must be between 3 and 25") @NotNull(message = "name can not be empty") String name,
+			@Size(min = 3, max = 25, message = "Surname Size must be between 3 and 25") @NotNull(message = "surname can not be empty") String surname,
+			@NotNull(message = "gender can not be empty") Gender gender, String adress,
+			@Size(min = 12, max = 12) @NotNull(message = "phone can not be empty") @Pattern(regexp = "(?:\\d{3}-){2}\\d{4}") String phone,
+			@Size(min = 3, max = 80) @NotNull(message = "email can not be empty") @Email(message = "email should be a valid email") String email,
+			Blood blood, Set<Extras> extras, Set<Services> services, Set<Restaurant> restaurant) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.surname = surname;
+		this.gender = gender;
+		this.adress = adress;
+		this.phone = phone;
+		this.email = email;
+		this.blood = blood;
+		this.extras = extras;
+		this.services = services;
+		this.restaurant = restaurant;
+	}
+
 	public Long getId() {
 		return id;
 	}

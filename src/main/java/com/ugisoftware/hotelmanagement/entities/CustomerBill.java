@@ -55,6 +55,23 @@ public class CustomerBill {
 	@JsonIgnore
 	private Rooms rooms;
 
+	public CustomerBill() {
+		super();
+	}
+
+	public CustomerBill(Long id, Customers customers,
+			@NotNull(message = "Entry Date can not be empty") String entryDate,
+			@NotNull(message = "Exit Date can not be empty") String exitDate,
+			@NotNull(message = "count can not be empty") int count, Rooms rooms) {
+		super();
+		this.id = id;
+		this.customers = customers;
+		this.entryDate = entryDate;
+		this.exitDate = exitDate;
+		this.count = count;
+		this.rooms = rooms;
+	}
+
 	public Long getId() {
 		return id;
 	}
