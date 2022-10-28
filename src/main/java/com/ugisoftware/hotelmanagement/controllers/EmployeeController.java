@@ -5,6 +5,7 @@ import java.util.List;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +20,9 @@ import com.ugisoftware.hotelmanagement.entities.Employee;
 import com.ugisoftware.hotelmanagement.services.EmployeeService;
 
 
-@RequestMapping("/employee")
+@RequestMapping("/api/employee")
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class EmployeeController {
 	private EmployeeService employeeService;
 
@@ -45,7 +47,6 @@ public Employee  createEmployee(@Valid @RequestBody Employee newEmployee) {
 }
 
 @PutMapping("/{employeeId}")
-@Transactional
 public Employee updateEmployee(@PathVariable Long employeeId,@Valid @RequestBody Employee newEmployee)
 {
 	return employeeService.updateEmployee(employeeId,newEmployee);

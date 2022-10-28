@@ -64,18 +64,15 @@ public class CustomerService {
 	
 	public Customers updateCustomer(Long customerId, @Valid Customers newCustomer) {
 		 return customerRepository.findById(customerId).map(customer -> {
-	
-				 Customers updateCustomer=new Customers();
-					
-				 updateCustomer.setAdress(newCustomer.getAdress());
-				 updateCustomer.setPhone(newCustomer.getPhone());
-				 updateCustomer.setBlood(newCustomer.getBlood());
-				 updateCustomer.setEmail(newCustomer.getEmail());
-				 updateCustomer.setGender(newCustomer.getGender());
-				 updateCustomer.setName(newCustomer.getName());
-				 updateCustomer.setSurname(newCustomer.getSurname());
-				 updateCustomer.setId(newCustomer.getId());
-	         return customerRepository.save(updateCustomer);
+
+			 customer.setAdress(newCustomer.getAdress());
+			 customer.setPhone(newCustomer.getPhone());
+			 customer.setBlood(newCustomer.getBlood());
+			 customer.setEmail(newCustomer.getEmail());
+			 customer.setGender(newCustomer.getGender());
+			 customer.setName(newCustomer.getName());
+			 customer.setSurname(newCustomer.getSurname());
+	         return customerRepository.save(customer);
 				
 	     }).orElseThrow(() -> new EntityNotFoundException("CustomerId " + customerId + " not found"));
 

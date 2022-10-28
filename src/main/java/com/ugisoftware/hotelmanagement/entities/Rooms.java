@@ -43,11 +43,9 @@ public class Rooms {
 	private Employee employee;
 	
 	@NotNull(message = "Statue can not be empty")
-	@Size(min=3, max=25,message = "Statue size must be between 3 and 25")
 	private RoomStatues statue;
 	
 	@NotNull(message = "Is Clean can not be empty")
-	
 	private RoomClean clean;
 	
 	public Long getId() {

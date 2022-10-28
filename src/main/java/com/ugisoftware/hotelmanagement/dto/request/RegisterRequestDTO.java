@@ -24,7 +24,20 @@ public class RegisterRequestDTO {
 	  private Set<String> role;
 
 	  
-	  public String getName() {
+	  public RegisterRequestDTO(@NotBlank @Size(min = 3, max = 30) String name,
+			@NotBlank @Size(min = 3, max = 30) String surname, @NotBlank @Size(min = 3, max = 20) String username,
+			@NotBlank @Email @Size(max = 50) String email, Boolean enabled, Set<String> role, String password) {
+		super();
+		this.name = name;
+		this.surname = surname;
+		this.username = username;
+		this.email = email;
+		this.enabled = enabled;
+		this.role = role;
+		this.password = password;
+	}
+
+	public String getName() {
 		return name;
 	}
 

@@ -1,5 +1,7 @@
 package com.ugisoftware.hotelmanagement.security;
 
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.BeanIds;
 import org.springframework.context.annotation.Configuration;
@@ -60,31 +62,30 @@ public void configure(AuthenticationManagerBuilder authenticationManagerBuilder)
 public CorsFilter corsFilter() {
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     CorsConfiguration config = new CorsConfiguration();
+    
     config.setAllowCredentials(true);
-    config.addAllowedOrigin("*");
+    
+    config.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+    config.setAllowedOrigins(List.of("*"));
     config.addAllowedHeader("*");
-    config.addAllowedMethod("OPTIONS");
-    config.addAllowedMethod("HEAD");
-    config.addAllowedMethod("GET");
-    config.addAllowedMethod("PUT");
-    config.addAllowedMethod("POST");
-    config.addAllowedMethod("DELETE");
-    config.addAllowedMethod("PATCH");
-    source.registerCorsConfiguration("/**", config);
+    config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PUT","OPTIONS","PATCH", "DELETE"));
+    config.addAllowedOrigin("http://localhost:3000");
+    config.setExposedHeaders(List.of("Authorization"));
+    source.registerCorsConfiguration("/api/**", config);
     return new CorsFilter(source);
 }
 
 @Override
 public void configure(HttpSecurity httpSecurity) throws Exception {
 	httpSecurity
-		.cors().and().csrf().disable();
-	//	.exceptionHandling().authenticationEntryPoint(handler).and()
-	//	.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-	//	.authorizeRequests()
-	//	.antMatchers(HttpMethod.GET, "/emloyee").permitAll()
-	//	.antMatchers(HttpMethod.GET, "/room").permitAll()
-	//	.antMatchers("/auth/**").permitAll()
-	//	.anyRequest().authenticated();
+		.cors().and().csrf().disable()
+		.exceptionHandling().authenticationEntryPoint(handler).and()
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+		.authorizeRequests()
+		.antMatchers(HttpMethod.GET, "/api/emloyee").permitAll()
+		.antMatchers(HttpMethod.GET, "/api/room").permitAll()
+		.antMatchers("/api/auth/**").permitAll()
+		.anyRequest().authenticated();
 		
 	httpSecurity.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 }

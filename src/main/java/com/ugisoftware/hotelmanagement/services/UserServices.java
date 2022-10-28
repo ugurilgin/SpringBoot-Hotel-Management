@@ -63,11 +63,11 @@ public User getUser(Long userId) {
 public User updateUser(User updateUser, Long userId) {
 	// TODO Auto-generated method stub
 	 return userRepository.findById(userId).map(user -> {
-		 User foundedUser=new User();
-		 foundedUser.setName(updateUser.getName());
-		 foundedUser.setSurname(updateUser.getSurname());
-		foundedUser.setPassword(passwordEncoder.encode(updateUser.getPassword()));
-		return userRepository.save(foundedUser);
+		 
+		 user.setName(updateUser.getName());
+		 user.setSurname(updateUser.getSurname());
+		 user.setPassword(passwordEncoder.encode(updateUser.getPassword()));
+		return userRepository.save(user);
 		
      }).orElseThrow(() -> new EntityNotFoundException("UserId " + userId + " not found"));
 }

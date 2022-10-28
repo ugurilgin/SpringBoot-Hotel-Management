@@ -18,6 +18,7 @@ import org.springframework.security.config.authentication.UserServiceBeanDefinit
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,7 +43,8 @@ import com.ugisoftware.hotelmanagement.security.service.UserDetailsImpl;
 
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AuthController {
   @Autowired
   AuthenticationManager authenticationManager;
@@ -60,7 +62,7 @@ public class AuthController {
   JWTTokenProvider jwtUtils;
   @Autowired
   private RefreshTokenService refreshTokenService;
-
+  
   @PostMapping("/signin")
   public ResponseEntity<?> authenticateUser( @RequestBody @Valid LoginRequestDTO loginRequest) {
 	  Optional<User> user=userRepository.findByUsername(loginRequest.getUsername());
@@ -191,6 +193,7 @@ public class AuthController {
 		}
 		
 	}
+	
 }
 
 

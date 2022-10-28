@@ -66,22 +66,20 @@ public Rooms createRoom(@Valid RoomCreateDTO room)
 
 
 public Rooms updateRoom(@Valid Long roomId,RoomCreateDTO room ) {
-	Employee employee=employeeService.getEmployee(room.getEmployeeId()) ;
 	
+	 Rooms oldRoom =  roomsRepository.findById(roomId)
+             .orElseThrow(() -> new EntityNotFoundException("Room Not Found with id : " + roomId));
 	 return roomsRepository.findById(roomId).map(newroom -> {
-		 if(employee==null)
-				throw new EntityNotFoundException("Employee Not Found with id : " + room.getEmployeeId());
-			else {
+		 
 		 newroom.setBeds(room.getBeds());
 		 newroom.setClean(room.getClean());
-		 newroom.setId(room.getId());
+		 newroom.setEmployee(oldRoom.getEmployee());
 		 newroom.setPrice(room.getPrice());
 		 newroom.setStatue(room.getStatue());
 		 newroom.setType(room.getType());
-		 newroom.setEmployee(employee);
 		 newroom.setRoomNumber(room.getRoomNumber());
          return roomsRepository.save(newroom);
-			}
+			
      }).orElseThrow(() -> new EntityNotFoundException("RoomId " + roomId + " not found"));
 
 	

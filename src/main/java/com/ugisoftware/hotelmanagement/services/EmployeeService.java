@@ -80,21 +80,20 @@ public class EmployeeService {
 
 		 return employeeRepository.findById(employeeId).map(employee -> {
 	
-					Employee updateEmployee=new Employee();	
-					updateEmployee.setAdress(newEmployee.getAdress());
-					updateEmployee.setBirthDate(newEmployee.getBirthDate());
-					updateEmployee.setBlood(newEmployee.getBlood());
-					updateEmployee.setEmail(newEmployee.getEmail());
-					updateEmployee.setGender(newEmployee.getGender());
-					updateEmployee.setName(newEmployee.getName());
-					updateEmployee.setSurname(newEmployee.getSurname());
-					updateEmployee.setId(newEmployee.getId());
-					updateEmployee.setFinishDate(newEmployee.getFinishDate());
-					updateEmployee.setPhone(newEmployee.getPhone());
-					updateEmployee.setSalary(newEmployee.getSalary());
-					updateEmployee.setStartDate(newEmployee.getStartDate());
-					updateEmployee.setJob(newEmployee.getJob());
-	         return employeeRepository.save(updateEmployee);
+					
+			 employee.setAdress(newEmployee.getAdress());
+			 employee.setBirthDate(newEmployee.getBirthDate());
+			 employee.setBlood(newEmployee.getBlood());
+			 employee.setEmail(newEmployee.getEmail());
+			 employee.setGender(newEmployee.getGender());
+			 employee.setName(newEmployee.getName());
+			 employee.setSurname(newEmployee.getSurname());
+			 employee.setFinishDate(newEmployee.getFinishDate());
+			 employee.setPhone(newEmployee.getPhone());
+			 employee.setSalary(newEmployee.getSalary());
+			 employee.setStartDate(newEmployee.getStartDate());
+			 employee.setJob(newEmployee.getJob());
+	         return employeeRepository.save(employee);
 				
 	     }).orElseThrow(() -> new EntityNotFoundException("EmployeeId " + employeeId + " not found"));
 

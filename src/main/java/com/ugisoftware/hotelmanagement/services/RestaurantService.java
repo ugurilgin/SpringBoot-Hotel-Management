@@ -46,11 +46,10 @@ public RestaurantService(RestaurantRepository restaurantRepository,CustomerRepos
 
 	public Restaurant updateMeal(Long mealId, @Valid Restaurant newMeal) {
 		return restaurantRepository.findById(mealId).map(meal -> {
-				 Restaurant updateMeal=new Restaurant();
-				 updateMeal.setId(newMeal.getId());
-				 updateMeal.setName(newMeal.getName());
-				 updateMeal.setPrice(newMeal.getPrice());
-	         return restaurantRepository.save(updateMeal);
+				
+				 meal.setName(newMeal.getName());
+				 meal.setPrice(newMeal.getPrice());
+	         return restaurantRepository.save(meal);
 				
 	     }).orElseThrow(() -> new EntityNotFoundException("MealId " + mealId + " not found"));
 

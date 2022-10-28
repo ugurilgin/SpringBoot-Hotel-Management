@@ -78,7 +78,6 @@ public class CustomerBillService {
 				throw new EntityNotFoundException("Customer Not Found with id : " + newBill.getCustomerId());
 				else {
 					newbill.setCount(newBill.getCount());
-					newbill.setId(newBill.getId());
 					newbill.setCustomers(customer);
 					newbill.setRooms(rooms);
 					newbill.setEntryDate(newBill.getEntryDate());

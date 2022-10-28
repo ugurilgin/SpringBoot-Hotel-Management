@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +19,9 @@ import com.ugisoftware.hotelmanagement.dto.response.BillResponseDTO;
 import com.ugisoftware.hotelmanagement.entities.CustomerBill;
 import com.ugisoftware.hotelmanagement.services.CustomerBillService;
 
-@RequestMapping("/bill")
+@RequestMapping("/api/bill")
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CustomerBillController {
 	private CustomerBillService customerBillService;
 

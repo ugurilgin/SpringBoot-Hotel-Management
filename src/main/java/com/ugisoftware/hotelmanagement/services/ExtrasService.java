@@ -48,11 +48,10 @@ public ExtrasService(ExtrasRepository extrasRepository,CustomerRepository custom
 
 	public Extras updateExtras(Long extrasId, @Valid Extras newExtras) {
 		return extrasRepository.findById(extrasId).map(extra -> {
-				 Extras updateExtra=new Extras();
-				 updateExtra.setId(newExtras.getId());
-				 updateExtra.setName(newExtras.getName());
-				 updateExtra.setPrice(newExtras.getPrice());
-	         return extrasRepository.save(updateExtra);
+				
+			extra.setName(newExtras.getName());
+			extra.setPrice(newExtras.getPrice());
+	         return extrasRepository.save(extra);
 				
 	     }).orElseThrow(() -> new EntityNotFoundException("ExtraId " + extrasId + " not found"));
 
